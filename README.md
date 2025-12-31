@@ -37,6 +37,9 @@ python cli.py --mode 2
 
 # Start API server
 uvicorn app.main:app --reload --port 8000
+
+# Start API server in Debug mode (Windows) powershell
+$env:HOLLER_DEBUG="true"; uvicorn app.main:app --reload --port 8000
 ```
 
 ### Frontend
