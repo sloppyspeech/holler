@@ -6,9 +6,13 @@ import {
     Cpu,
     ChevronLeft,
     ChevronRight,
+    Sun,
+    Moon,
+    Monitor,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { useTheme } from "@/context/ThemeContext";
 
 interface SidebarProps {
     currentPage: string;
@@ -30,10 +34,20 @@ export function Sidebar({
     collapsed,
     onToggleCollapse,
 }: SidebarProps) {
+    const { theme, setTheme } = useTheme();
+
+    const toggleTheme = () => {
+        if (theme === "light") setTheme("dark");
+        else if (theme === "dark") setTheme("system");
+        else setTheme("light");
+    };
+
+    const ThemeIcon = theme === "light" ? Sun : theme === "dark" ? Moon : Monitor;
+
     return (
         <div
             className={cn(
-                "flex flex-col h-full bg-gradient-to-b from-slate-900 to-slate-800 text-white transition-all duration-300 relative",
+                "flex flex-col h-full bg-slate-900 text-white transition-all duration-300 relative",
                 collapsed ? "w-16" : "w-64"
             )}
         >
@@ -85,6 +99,22 @@ export function Sidebar({
                     );
                 })}
             </nav>
+
+            {/* Theme Toggle */}
+            <div className="p-2">
+                <Button
+                    variant="ghost"
+                    onClick={toggleTheme}
+                    className={cn(
+                        "w-full justify-start gap-3 h-11 text-slate-400 hover:text-white hover:bg-white/5",
+                        collapsed ? "px-3" : "px-4"
+                    )}
+                    title={`Current theme: ${theme}`}
+                >
+                    <ThemeIcon size={20} />
+                    {!collapsed && <span className="animate-fade-in">Theme: {theme.charAt(0).toUpperCase() + theme.slice(1)}</span>}
+                </Button>
+            </div>
 
             {/* Collapse Button */}
             <div className="p-2">

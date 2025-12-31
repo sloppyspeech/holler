@@ -10,14 +10,14 @@ function Badge({ className, variant = "default", ...props }: BadgeProps) {
             className={cn(
                 "inline-flex items-center rounded-full border text-[12px] font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-[hsl(var(--ring))] focus:ring-offset-2",
                 {
-                    "border-transparent bg-slate-900 text-white":
+                    "border-transparent bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))]":
                         variant === "default",
-                    "border-transparent bg-slate-100 text-slate-900":
+                    "border-transparent bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))]":
                         variant === "secondary",
-                    "border-transparent bg-red-100 text-red-700 border-red-200":
+                    "border-transparent bg-[hsl(var(--destructive))] text-[hsl(var(--destructive-foreground))]":
                         variant === "destructive",
-                    "text-slate-600 border-slate-200": variant === "outline",
-                    "border-transparent bg-green-100 text-green-700 border-green-200": variant === "success",
+                    "text-[hsl(var(--muted-foreground))] border-[hsl(var(--border))] bg-[hsl(var(--muted)/0.1)]": variant === "outline",
+                    "border-transparent bg-[hsl(var(--success-bg)/0.2)] text-[hsl(var(--success-bg)/0.8)] dark:bg-[hsl(var(--success-bg)/0.3)] dark:text-[hsl(var(--success-bg))]": variant === "success",
                 },
                 className
             )}

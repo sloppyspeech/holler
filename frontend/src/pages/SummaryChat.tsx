@@ -24,20 +24,20 @@ const styles = {
         display: "flex",
         flexDirection: "row" as const,
         height: "100%",
-        backgroundColor: "#f8fafc",
+        backgroundColor: "hsl(var(--background))",
         overflow: "hidden",
     } as React.CSSProperties,
     sidebar: {
         width: "280px",
-        backgroundColor: "#ffffff",
-        borderRight: "1px solid #e2e8f0",
+        backgroundColor: "hsl(var(--card))",
+        borderRight: "1px solid hsl(var(--border))",
         display: "flex",
         flexDirection: "column" as const,
         height: "100%",
     } as React.CSSProperties,
     sidebarHeader: {
         padding: "20px",
-        borderBottom: "1px solid #f1f5f9",
+        borderBottom: "1px solid hsl(var(--border) / 0.5)",
     } as React.CSSProperties,
     sidebarContent: {
         flex: 1,
@@ -53,9 +53,9 @@ const styles = {
         justifyContent: "space-between",
         gap: "10px",
         marginBottom: "4px",
-        backgroundColor: active ? "#f1f5f9" : "transparent",
+        backgroundColor: active ? "hsl(var(--accent))" : "transparent",
         transition: "background-color 0.2s",
-        border: active ? "1px solid #e2e8f0" : "1px solid transparent",
+        border: active ? "1px solid hsl(var(--border))" : "1px solid transparent",
     }) as React.CSSProperties,
     mainChat: {
         flex: 1,
@@ -66,9 +66,9 @@ const styles = {
     } as React.CSSProperties,
     header: {
         padding: "16px 32px",
-        backgroundColor: "white",
-        borderBottom: "1px solid #e2e8f0",
-        boxShadow: "0 1px 2px rgba(0, 0, 0, 0.05)",
+        backgroundColor: "hsl(var(--card))",
+        borderBottom: "1px solid hsl(var(--border))",
+        boxShadow: "0 1px 2px rgba(0, 0, 0, 0.1)",
     } as React.CSSProperties,
     headerContent: {
         maxWidth: "800px",
@@ -91,29 +91,29 @@ const styles = {
     headerTitle: {
         fontSize: "18px",
         fontWeight: 700,
-        color: "#1e293b",
+        color: "hsl(var(--foreground))",
         margin: 0,
     } as React.CSSProperties,
     headerSubtitle: {
         fontSize: "12px",
-        color: "#64748b",
+        color: "hsl(var(--muted-foreground))",
         margin: 0,
     } as React.CSSProperties,
     modelSelector: {
         display: "flex",
         alignItems: "center",
         gap: "8px",
-        backgroundColor: "#f1f5f9",
+        backgroundColor: "hsl(var(--muted))",
         padding: "4px 12px",
         borderRadius: "8px",
-        border: "1px solid #e2e8f0",
+        border: "1px solid hsl(var(--border))",
     } as React.CSSProperties,
     select: {
         border: "none",
         backgroundColor: "transparent",
         fontSize: "13px",
         fontWeight: 500,
-        color: "#475569",
+        color: "hsl(var(--muted-foreground))",
         cursor: "pointer",
         outline: "none",
     } as React.CSSProperties,
@@ -135,7 +135,7 @@ const styles = {
         width: "64px",
         height: "64px",
         borderRadius: "50%",
-        background: "linear-gradient(135deg, #f3e8ff 0%, #fce7f3 100%)",
+        background: "hsl(var(--muted))",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -144,12 +144,12 @@ const styles = {
     welcomeTitle: {
         fontSize: "20px",
         fontWeight: 600,
-        color: "#374151",
+        color: "hsl(var(--foreground))",
         margin: "0 0 8px 0",
     } as React.CSSProperties,
     welcomeText: {
         fontSize: "14px",
-        color: "#64748b",
+        color: "hsl(var(--muted-foreground))",
         maxWidth: "420px",
         margin: "0 0 28px 0",
         lineHeight: 1.6,
@@ -161,9 +161,9 @@ const styles = {
         maxWidth: "560px",
     } as React.CSSProperties,
     suggestionCard: {
-        backgroundColor: "white",
+        backgroundColor: "hsl(var(--card))",
         borderRadius: "10px",
-        border: "1px solid #e2e8f0",
+        border: "1px solid hsl(var(--border))",
         padding: "16px",
         cursor: "pointer",
         transition: "all 0.2s",
@@ -203,14 +203,14 @@ const styles = {
     messageBubble: (isUser: boolean) => ({
         display: "inline-block",
         textAlign: "left" as const,
-        backgroundColor: isUser ? "#3b82f6" : "white",
-        color: isUser ? "white" : "#1e293b",
+        backgroundColor: isUser ? "hsl(var(--primary))" : "hsl(var(--card))",
+        color: isUser ? "hsl(var(--primary-foreground))" : "hsl(var(--foreground))",
         borderRadius: isUser ? "16px 16px 4px 16px" : "16px 16px 16px 4px",
         padding: "16px",
         boxShadow: isUser
-            ? "0 4px 12px rgba(59, 130, 246, 0.15)"
-            : "0 2px 8px rgba(0, 0, 0, 0.05)",
-        border: isUser ? "none" : "1px solid #e2e8f0",
+            ? "0 4px 12px rgba(var(--primary), 0.15)"
+            : "0 2px 8px rgba(0, 0, 0, 0.1)",
+        border: isUser ? "none" : "1px solid hsl(var(--border))",
         position: "relative" as const,
     }) as React.CSSProperties,
     messageFooter: {
@@ -236,8 +236,8 @@ const styles = {
     } as React.CSSProperties,
     inputArea: {
         padding: "20px 32px",
-        backgroundColor: "white",
-        borderTop: "1px solid #e2e8f0",
+        backgroundColor: "hsl(var(--card))",
+        borderTop: "1px solid hsl(var(--border))",
     } as React.CSSProperties,
     inputContainer: {
         maxWidth: "800px",
@@ -458,7 +458,7 @@ export function SummaryChatPage() {
                                     <MessageSquare size={14} style={{ color: sessionId === s.id ? "#3b82f6" : "#94a3b8", flexShrink: 0 }} />
                                     <span style={{
                                         fontSize: "13px",
-                                        color: sessionId === s.id ? "#1e293b" : "#64748b",
+                                        color: sessionId === s.id ? "hsl(var(--foreground))" : "hsl(var(--muted-foreground))",
                                         fontWeight: sessionId === s.id ? 600 : 400,
                                         whiteSpace: "nowrap",
                                         overflow: "hidden",
@@ -507,7 +507,7 @@ export function SummaryChatPage() {
 
                         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                             <div style={styles.modelSelector}>
-                                <Cpu size={14} style={{ color: "#64748b" }} />
+                                <Cpu size={14} style={{ color: "hsl(var(--muted-foreground))" }} />
                                 <select
                                     style={styles.select}
                                     value={selectedModel}
@@ -540,7 +540,7 @@ export function SummaryChatPage() {
                                         style={styles.suggestionCard}
                                         onClick={() => setInput(suggestion)}
                                     >
-                                        <p style={{ fontSize: "14px", color: "#475569", margin: 0 }}>{suggestion}</p>
+                                        <p style={{ fontSize: "14px", color: "hsl(var(--foreground))", margin: 0 }}>{suggestion}</p>
                                     </div>
                                 ))}
                             </div>

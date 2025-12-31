@@ -15,7 +15,7 @@ export function MainLayout({
     const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
     return (
-        <div className="flex h-screen overflow-hidden bg-slate-50">
+        <div className="flex h-screen overflow-hidden bg-background">
             {/* Sidebar */}
             <Sidebar
                 currentPage={currentPage}

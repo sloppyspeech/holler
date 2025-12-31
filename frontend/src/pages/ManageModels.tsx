@@ -14,7 +14,7 @@ const styles = {
     container: {
         height: "100%",
         overflow: "auto",
-        backgroundColor: "#f8fafc",
+        backgroundColor: "hsl(var(--background))",
         padding: "32px",
     } as React.CSSProperties,
     wrapper: {
@@ -41,19 +41,19 @@ const styles = {
     headerTitle: {
         fontSize: "24px",
         fontWeight: 700,
-        color: "#1e293b",
+        color: "hsl(var(--foreground))",
         margin: 0,
     } as React.CSSProperties,
     headerSubtitle: {
         fontSize: "14px",
-        color: "#64748b",
+        color: "hsl(var(--muted-foreground))",
         margin: 0,
     } as React.CSSProperties,
     card: {
-        backgroundColor: "white",
+        backgroundColor: "hsl(var(--card))",
         borderRadius: "12px",
-        border: "1px solid #e2e8f0",
-        boxShadow: "0 1px 3px rgba(0, 0, 0, 0.08)",
+        border: "1px solid hsl(var(--border))",
+        boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)",
         marginBottom: "16px",
         padding: "24px",
     } as React.CSSProperties,
@@ -63,20 +63,20 @@ const styles = {
     cardTitle: {
         fontSize: "16px",
         fontWeight: 600,
-        color: "#1e293b",
+        color: "hsl(var(--foreground))",
         margin: "0 0 6px 0",
     } as React.CSSProperties,
     cardDescription: {
         fontSize: "14px",
-        color: "#64748b",
+        color: "hsl(var(--muted-foreground))",
         margin: 0,
     } as React.CSSProperties,
     cardContent: {
         padding: "0 24px 24px 24px",
     } as React.CSSProperties,
     connectionCard: (connected: boolean) => ({
-        backgroundColor: connected ? "#f0fdf4" : "#fef2f2",
-        border: `2px solid ${connected ? "#bbf7d0" : "#fecaca"}`,
+        backgroundColor: connected ? "hsl(var(--success-bg) / 0.15)" : "hsl(var(--destructive) / 0.15)",
+        border: `2px solid ${connected ? "hsl(var(--success-bg) / 0.3)" : "hsl(var(--destructive) / 0.3)"}`,
         borderRadius: "12px",
         padding: "20px 24px",
         marginBottom: "16px",
@@ -95,12 +95,12 @@ const styles = {
     modelItem: (isActive: boolean, activeColor: string) => ({
         padding: "16px",
         borderRadius: "8px",
-        border: isActive ? `2px solid ${activeColor}` : "1px solid #e2e8f0",
-        backgroundColor: isActive ? "#faf5ff" : "white",
+        border: isActive ? `2px solid ${activeColor}` : "1px solid hsl(var(--border))",
+        backgroundColor: isActive ? "hsl(var(--accent))" : "hsl(var(--card))",
         transition: "all 0.2s",
     }) as React.CSSProperties,
     infoCard: {
-        backgroundColor: "#f1f5f9",
+        backgroundColor: "hsl(var(--muted))",
         borderRadius: "12px",
         padding: "24px",
     } as React.CSSProperties,
@@ -205,8 +205,8 @@ export function ManageModelsPage() {
                             )}
                         </div>
                         <div>
-                            <h3 style={{ fontSize: "16px", fontWeight: 600, margin: "0 0 4px 0" }}>Ollama Connection Status</h3>
-                            <p style={{ fontSize: "14px", color: status?.connected ? "#16a34a" : "#dc2626", margin: 0 }}>
+                            <h3 style={{ fontSize: "16px", fontWeight: 600, margin: "0 0 4px 0", color: "hsl(var(--foreground))" }}>Ollama Connection Status</h3>
+                            <p style={{ fontSize: "14px", color: status?.connected ? "#22c55e" : "hsl(var(--destructive))", margin: 0 }}>
                                 {status?.connected ? "Connected and ready" : "Not connected - Please start Ollama"}
                             </p>
                         </div>
@@ -261,16 +261,16 @@ export function ManageModelsPage() {
                                                 width: "44px",
                                                 height: "44px",
                                                 borderRadius: "10px",
-                                                backgroundColor: "#f1f5f9",
+                                                backgroundColor: "hsl(var(--muted))",
                                                 display: "flex",
                                                 alignItems: "center",
                                                 justifyContent: "center",
                                                 flexShrink: 0
                                             }}>
-                                                <Cpu size={22} style={{ color: "#64748b" }} />
+                                                <Cpu size={22} style={{ color: "hsl(var(--muted-foreground))" }} />
                                             </div>
                                             <div>
-                                                <p style={{ fontSize: "15px", fontWeight: 600, margin: "0 0 2px 0", color: "#1e293b" }}>{model.name}</p>
+                                                <p style={{ fontSize: "15px", fontWeight: 600, margin: "0 0 2px 0", color: "hsl(var(--foreground))" }}>{model.name}</p>
                                                 <div style={{ display: "flex", gap: "8px" }}>
                                                     {model.is_current && <Badge variant="default" style={{ backgroundColor: "#a855f7", fontSize: "10px" }}>Active Embedding</Badge>}
                                                     {model.is_app_current && <Badge variant="default" style={{ backgroundColor: "#3b82f6", fontSize: "10px" }}>Active Chat</Badge>}

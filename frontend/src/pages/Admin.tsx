@@ -23,7 +23,6 @@ import {
     fetchFiles,
     deleteFile,
     deleteEmbedding,
-    deleteAllEmbeddings,
     resetEmbeddings,
     recalculateEmbedding,
     batchProcess,
@@ -41,7 +40,7 @@ const styles = {
     container: {
         height: "100%",
         overflow: "auto",
-        backgroundColor: "#f8fafc",
+        backgroundColor: "hsl(var(--background))",
         padding: "32px",
     } as React.CSSProperties,
     wrapper: {
@@ -68,12 +67,12 @@ const styles = {
     headerTitle: {
         fontSize: "24px",
         fontWeight: 700,
-        color: "#1e293b",
+        color: "hsl(var(--foreground))",
         margin: 0,
     } as React.CSSProperties,
     headerSubtitle: {
         fontSize: "14px",
-        color: "#64748b",
+        color: "hsl(var(--muted-foreground))",
         margin: 0,
     } as React.CSSProperties,
     statsGrid: {
@@ -104,10 +103,10 @@ const styles = {
         lineHeight: 1,
     } as React.CSSProperties,
     card: {
-        backgroundColor: "white",
+        backgroundColor: "hsl(var(--card))",
         borderRadius: "12px",
-        border: "1px solid #e2e8f0",
-        boxShadow: "0 1px 3px rgba(0, 0, 0, 0.08)",
+        border: "1px solid hsl(var(--border))",
+        boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)",
         marginBottom: "16px",
     } as React.CSSProperties,
     cardHeader: {
@@ -119,12 +118,12 @@ const styles = {
         gap: "8px",
         fontSize: "16px",
         fontWeight: 600,
-        color: "#1e293b",
+        color: "hsl(var(--foreground))",
         margin: "0 0 6px 0",
     } as React.CSSProperties,
     cardDescription: {
         fontSize: "14px",
-        color: "#64748b",
+        color: "hsl(var(--muted-foreground))",
         margin: 0,
     } as React.CSSProperties,
     cardContent: {
@@ -137,7 +136,7 @@ const styles = {
         justifyContent: "center",
         width: "100%",
         height: "120px",
-        border: "2px dashed #e2e8f0",
+        border: "2px dashed hsl(var(--border))",
         borderRadius: "8px",
         cursor: "pointer",
         transition: "all 0.2s",
@@ -151,13 +150,13 @@ const styles = {
         textAlign: "left" as const,
         padding: "12px 16px",
         fontWeight: 500,
-        color: "#64748b",
-        backgroundColor: "#f8fafc",
-        borderBottom: "1px solid #e2e8f0",
+        color: "hsl(var(--muted-foreground))",
+        backgroundColor: "hsl(var(--muted) / 0.5)",
+        borderBottom: "1px solid hsl(var(--border))",
     } as React.CSSProperties,
     tableCell: {
         padding: "14px 16px",
-        borderBottom: "1px solid #f1f5f9",
+        borderBottom: "1px solid hsl(var(--border) / 0.5)",
     } as React.CSSProperties,
     searchWrapper: {
         display: "flex",
@@ -167,9 +166,10 @@ const styles = {
     } as React.CSSProperties,
     logEntry: {
         padding: "10px 14px",
-        borderBottom: "1px solid #f1f5f9",
+        borderBottom: "1px solid hsl(var(--border) / 0.5)",
         fontFamily: "monospace",
         fontSize: "12px",
+        color: "hsl(var(--foreground))",
     } as React.CSSProperties,
     logLevel: (level: string) => {
         const colors: Record<string, { bg: string; text: string }> = {
@@ -341,20 +341,6 @@ export function AdminPage() {
         }
     };
 
-    const handleDeleteAllEmbeddings = async () => {
-        try {
-            setProcessing(true);
-            setProcessingStatus("🗑️ Deleting all embeddings...");
-            const result = await deleteAllEmbeddings();
-            setProcessingStatus(`✅ ${result.message}`);
-            await loadFiles();
-        } catch (error) {
-            console.error("Failed to delete all embeddings:", error);
-            setProcessingStatus("❌ Failed to delete all embeddings");
-        } finally {
-            setProcessing(false);
-        }
-    };
 
     const handleResetEmbeddings = async () => {
         try {
@@ -533,7 +519,7 @@ export function AdminPage() {
                                         <p>{searchQuery ? "No files match your search" : "No files in database"}</p>
                                     </div>
                                 ) : (
-                                    <div style={{ border: "1px solid #e2e8f0", borderRadius: "8px", overflow: "hidden" }}>
+                                    <div style={{ border: "1px solid hsl(var(--border))", borderRadius: "8px", overflow: "hidden" }}>
                                         <table style={styles.table}>
                                             <thead>
                                                 <tr>
@@ -547,7 +533,7 @@ export function AdminPage() {
                                             <tbody>
                                                 {filteredFiles.map((file) => (
                                                     <tr key={file.id} style={{ transition: "background-color 0.2s" }}>
-                                                        <td style={{ ...styles.tableCell, fontWeight: 500, color: "#1e293b", maxWidth: "250px" }}>
+                                                        <td style={{ ...styles.tableCell, fontWeight: 500, color: "hsl(var(--foreground))", maxWidth: "250px" }}>
                                                             <div style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                                                                 {file.video_title || file.actual_file_name}
                                                             </div>
@@ -566,12 +552,12 @@ export function AdminPage() {
                                                                         Embedded
                                                                     </Badge>
                                                                     {file.model_used && (
-                                                                        <div style={{ fontSize: "11px", color: "#94a3b8" }}>
+                                                                        <div style={{ fontSize: "11px", color: "hsl(var(--muted-foreground))" }}>
                                                                             Model: {file.model_used}
                                                                         </div>
                                                                     )}
                                                                     {file.calc_date && (
-                                                                        <div style={{ fontSize: "10px", color: "#64748b", marginTop: "2px", display: "flex", alignItems: "center", gap: "4px" }}>
+                                                                        <div style={{ fontSize: "10px", color: "hsl(var(--muted-foreground))", marginTop: "2px", display: "flex", alignItems: "center", gap: "4px" }}>
                                                                             <Clock size={10} />
                                                                             {formatDate(file.calc_date)}
                                                                         </div>
@@ -644,7 +630,7 @@ export function AdminPage() {
                                         placeholder="C:\path\to\summaries"
                                         value={directoryPath}
                                         onChange={(e) => setDirectoryPath(e.target.value)}
-                                        style={{ marginBottom: "12px" }}
+                                        style={{ marginBottom: "12px", backgroundColor: "hsl(var(--background))", color: "hsl(var(--foreground))" }}
                                     />
                                     <Button
                                         onClick={handleBatchProcess}

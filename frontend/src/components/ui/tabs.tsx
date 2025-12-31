@@ -10,7 +10,7 @@ const tabsListStyle: React.CSSProperties = {
     alignItems: "center",
     justifyContent: "center",
     borderRadius: "10px",
-    backgroundColor: "#f1f5f9",
+    backgroundColor: "hsl(var(--muted))",
     padding: "4px",
     gap: "4px",
 };
@@ -54,12 +54,12 @@ const TabsTrigger = React.forwardRef<
                 ...style,
             }}
             className={cn(
-                // Base colors from tailwind to avoid inline style persistence
-                "bg-transparent text-slate-500",
+                // Base colors from theme to avoid inline style persistence
+                "bg-transparent text-[hsl(var(--muted-foreground))]",
                 // Hover state
-                "hover:bg-slate-200 hover:text-slate-700",
+                "hover:bg-[hsl(var(--accent))] hover:text-[hsl(var(--accent-foreground))]",
                 // Active state
-                "data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow-sm",
+                "data-[state=active]:bg-[hsl(var(--card))] data-[state=active]:text-[hsl(var(--foreground))] data-[state=active]:shadow-sm",
                 className
             )}
             {...props}

@@ -23,19 +23,19 @@ const styles = {
     } as React.CSSProperties,
     sidebar: {
         width: "340px",
-        borderRight: "1px solid #e2e8f0",
+        borderRight: "1px solid hsl(var(--border))",
         display: "flex",
         flexDirection: "column" as const,
-        backgroundColor: "white",
+        backgroundColor: "hsl(var(--card))",
     } as React.CSSProperties,
     sidebarHeader: {
         padding: "20px",
-        borderBottom: "1px solid #e2e8f0",
+        borderBottom: "1px solid hsl(var(--border))",
     } as React.CSSProperties,
     sidebarTitle: {
         fontSize: "18px",
         fontWeight: 600,
-        color: "#1e293b",
+        color: "hsl(var(--foreground))",
         margin: "0 0 16px 0",
     } as React.CSSProperties,
     searchWrapper: {
@@ -46,7 +46,7 @@ const styles = {
         left: "12px",
         top: "50%",
         transform: "translateY(-50%)",
-        color: "#94a3b8",
+        color: "hsl(var(--muted-foreground))",
     } as React.CSSProperties,
     fileList: {
         flex: 1,
@@ -57,8 +57,8 @@ const styles = {
         padding: "16px",
         marginBottom: "10px",
         borderRadius: "10px",
-        border: isSelected ? "2px solid #3b82f6" : "1px solid #e2e8f0",
-        backgroundColor: isSelected ? "#eff6ff" : "white",
+        border: isSelected ? "2px solid hsl(var(--primary))" : "1px solid hsl(var(--border))",
+        backgroundColor: isSelected ? "hsl(var(--primary) / 0.1)" : "hsl(var(--card))",
         cursor: "pointer",
         transition: "all 0.2s",
     }) as React.CSSProperties,
@@ -80,7 +80,7 @@ const styles = {
     fileTitle: {
         fontSize: "14px",
         fontWeight: 500,
-        color: "#1e293b",
+        color: "hsl(var(--foreground))",
         margin: "0 0 10px 0",
         overflow: "hidden",
         textOverflow: "ellipsis",
@@ -94,22 +94,22 @@ const styles = {
     } as React.CSSProperties,
     fileDate: {
         fontSize: "12px",
-        color: "#94a3b8",
+        color: "hsl(var(--muted-foreground))",
         margin: 0,
     } as React.CSSProperties,
     mainContent: {
         flex: 1,
-        backgroundColor: "#f8fafc",
+        backgroundColor: "hsl(var(--background))",
     } as React.CSSProperties,
     contentHeader: {
         padding: "24px 32px",
-        backgroundColor: "white",
-        borderBottom: "1px solid #e2e8f0",
+        backgroundColor: "hsl(var(--card))",
+        borderBottom: "1px solid hsl(var(--border))",
     } as React.CSSProperties,
     contentTitle: {
         fontSize: "22px",
         fontWeight: 700,
-        color: "#1e293b",
+        color: "hsl(var(--foreground))",
         margin: "0 0 12px 0",
     } as React.CSSProperties,
     metaRow: {
@@ -122,17 +122,17 @@ const styles = {
         display: "flex",
         alignItems: "center",
         gap: "8px",
-        backgroundColor: "#f1f5f9",
+        backgroundColor: "hsl(var(--muted))",
         padding: "4px 12px",
         borderRadius: "8px",
-        border: "1px solid #e2e8f0",
+        border: "1px solid hsl(var(--border))",
     } as React.CSSProperties,
     select: {
         border: "none",
         backgroundColor: "transparent",
         fontSize: "13px",
         fontWeight: 500,
-        color: "#475569",
+        color: "hsl(var(--muted-foreground))",
         cursor: "pointer",
         outline: "none",
     } as React.CSSProperties,
@@ -142,10 +142,10 @@ const styles = {
         padding: "24px",
     } as React.CSSProperties,
     contentCard: {
-        backgroundColor: "white",
+        backgroundColor: "hsl(var(--card))",
         borderRadius: "12px",
-        border: "1px solid #e2e8f0",
-        boxShadow: "0 1px 3px rgba(0, 0, 0, 0.08)",
+        border: "1px solid hsl(var(--border))",
+        boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)",
         padding: "24px",
     } as React.CSSProperties,
     emptyState: {
@@ -158,7 +158,7 @@ const styles = {
         width: "64px",
         height: "64px",
         borderRadius: "50%",
-        backgroundColor: "#e2e8f0",
+        backgroundColor: "hsl(var(--muted))",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -226,18 +226,18 @@ export function AllSummariesPage() {
 
     if (loading) {
         return (
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100%", backgroundColor: "#f8fafc" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100%", backgroundColor: "hsl(var(--background))" }}>
                 <div style={{ textAlign: "center" }}>
                     <div style={{
                         width: "40px",
                         height: "40px",
-                        border: "4px solid #3b82f6",
+                        border: "4px solid hsl(var(--primary))",
                         borderTopColor: "transparent",
                         borderRadius: "50%",
                         animation: "spin 1s linear infinite",
                         margin: "0 auto 16px",
                     }} />
-                    <p style={{ fontSize: "14px", color: "#64748b" }}>Loading summaries...</p>
+                    <p style={{ fontSize: "14px", color: "hsl(var(--muted-foreground))" }}>Loading summaries...</p>
                 </div>
             </div>
         );
